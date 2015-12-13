@@ -25,8 +25,8 @@ var s1;
 var s2;
 
 function preload(){
-  for (var i = 1; i <= 11; i++){
-    m[i] = loadImage('assets/' + i + '.png');
+  for (var i = 2, cnt = 0; i <= 2048; i *= 2, cnt++){
+    m[cnt] = loadImage('assets/' + i + '.png');
   }
   bg = loadImage("assets/bg.jpg");
   s1 = loadSound("assets/s1.wav");
@@ -44,7 +44,7 @@ function setup() {
 }
 
 function mouseClicked() {
-    if ((mouseY < 160 && mouseY > 60) && (mouseX < 350 && mouseX > 250)) {
+    if ((mouseY < 160 && mouseY > 60) && (mouseX < 490 && mouseX > 380)) {
         data.fill(0);
         generateRandomTwo();
         data[sec] = 2;
@@ -241,8 +241,8 @@ function draw() {
     textSize(24);
     //text("Best:", 55, 105);
     //text("Score:", 55, 145);
-    text("New", 405, 110);
-    text("Game", 400, 140);
+    text("New", 415, 105);
+    text("Game", 407, 135);
     text("MS Cake Kitchen", 110, 110);
     text("Join the materials & get the MScake!", 80, 210);
     drawGrid();
@@ -265,13 +265,7 @@ function generateRandomTwo() {
 function drawGrid() {
     for (var i = 0; i < 16; i++) {
         if (data[i] !== 0) {
-            text(data[i], grid[i][0], grid[i][1]);
-            //if(data[i] === 2){
-              //image(m[0], grid[i][0], grid[i][1]);
-              //image(s, 300, 400);
-            //}
+            image(m[Math.log2(data[i]) - 1], grid[i][0] - 50, grid[i][1] - 60);
         }
     }
-    
-    
 }
