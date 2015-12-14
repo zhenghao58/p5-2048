@@ -25,13 +25,12 @@ var s1;
 var s2;
 
 function preload(){
-  for (var i = 2, cnt = 0; i <= 2048; i *= 2, cnt++){
-    m[cnt] = loadImage('assets/' + i + '.png');
-  }
-  bg = loadImage("assets/bg.jpg");
-  s1 = loadSound("assets/s1.wav");
-  s2 = loadSound("assets/s2.wav");
-  
+    for (var i = 2; i <= 2048; i *= 2){
+        m.push(loadImage('assets/' + i + '.png'));
+    }
+    bg = loadImage("assets/bg.jpg");
+    s1 = loadSound("assets/s1.wav");
+    s2 = loadSound("assets/s2.wav");
 }
 function setup() {
     createCanvas(600, 750);
@@ -39,21 +38,23 @@ function setup() {
     generateRandomTwo();
     data[sec] = 2;
     data[first] = 2;
-    s1.play();
     s2.play();
 }
 
 function mouseClicked() {
     if ((mouseY < 160 && mouseY > 60) && (mouseX < 490 && mouseX > 380)) {
+        s2.play();
         data.fill(0);
         generateRandomTwo();
         data[sec] = 2;
         data[first] = 2;
     }
+    s2.play();
     redraw();
 }
 
 function keyPressed() {
+    s1.play();
     if (keyCode === LEFT_ARROW) {
         for (var i = 0; i < 4; i++) {
             var insertPos = 0;
@@ -218,10 +219,8 @@ function keyPressed() {
 function draw() {
     background(bg);
     fill(255, 120);
-    //rect(50, 80, 160, 30, 20);
     rect(90, 80, 260, 40, 15);  //mscake
-    rect(388, 60, 100, 100, 20);  //newgame
-    //rect(450, 120, 100, 30);
+    rect(393, 60, 100, 100, 20);  //newgame
     var size = 120;
     var length = 4;
 
@@ -239,14 +238,12 @@ function draw() {
 
     fill(0, 0, 0);
     textSize(24);
-    //text("Best:", 55, 105);
-    //text("Score:", 55, 145);
     text("New", 415, 105);
     text("Game", 407, 135);
     text("MS Cake Kitchen", 110, 110);
-    text("Join the materials & get the MScake!", 80, 210);
+    text("Use the Arrowkeys", 80, 180);
+    text("Join the materials & get the 3 tier Cake!", 80, 210);
     drawGrid();
-
     textSize(60);
     fill(0);
     drawSprites();
